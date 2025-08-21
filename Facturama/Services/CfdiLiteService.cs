@@ -21,7 +21,7 @@ namespace Facturama.Services
 
         public enum CfdiStatus
         {
-            All, Active, Cancel
+            all, Active, Cancel
         }
 
         public CfdiLiteService(RestClient httpClient) : 
@@ -95,13 +95,23 @@ namespace Facturama.Services
             return file;
         }
 
-        public CfdiSearchResults[] List(int folioStart = -1, int folioEnd = -1,
-            string rfc = null, string taxEntityName = null,
-            string dateStart = "", string dateEnd = "",
-            string idBranch = "", string serie = "",
-            CfdiStatus status = CfdiStatus.Active)
+        public CfdiSearchResults[] List(
+            int folioStart = -1,
+            int folioEnd = -1,
+            string rfc = null,
+            string taxEntityName = null,
+            string dateStart = "",
+            string dateEnd = "",
+            string idBranch = "",
+            string serie = "",
+            CfdiStatus status = CfdiStatus.all,
+            string OrderNumber = "",
+            string invoiceType = "",
+            string paymentMethod = "",
+            string rfcIssuer = "",
+            int page = 0)
         {
-            var request = new RestRequest($"{UriResource}Cfdi?type=issuedLite&status={status}&folioStart={folioStart}&folioEnd={folioEnd}&rfc={rfc}&taxEntityName={taxEntityName}&dateStart={dateStart}&dateEnd={dateEnd}&idBranch={idBranch}&serie={serie}", Method.GET);
+            var request = new RestRequest($"{UriResource}Cfdi?type=issuedLite&status={status}&folioStart={folioStart}&folioEnd={folioEnd}&rfc={rfc}&taxEntityName={taxEntityName}&dateStart={dateStart}&dateEnd={dateEnd}&idBranch={idBranch}&serie={serie}&OrderNumber={OrderNumber}&invoiceType={invoiceType}&paymentMethod={paymentMethod}&rfcIssuer={rfcIssuer}&page={page}", Method.GET);
             request.AddHeader("Content-Type", "application/json");
 
             var taskCompletionSource = new TaskCompletionSource<IRestResponse>();

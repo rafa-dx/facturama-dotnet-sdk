@@ -19,7 +19,8 @@ namespace MultiIssuerExamples
             //TestCreateCfdiMultiemisor40(facturamaMultiEmisor);// CFDI 4.0
             //TestCreatePaymentCfdi(facturamaMultiEmisor);
             //TestCreatePaymentCfdi40(facturamaMultiEmisor); // Complemento de Pago 20
-            new ForeignTradeExampleAPILite(facturamaMultiEmisor).Run(); // Comercio Exterior
+            //new ForeignTradeExampleAPILite(facturamaMultiEmisor).Run(); // Comercio Exterior
+            //TestListCfdi(facturamaMultiEmisor);
 
             //new EducationalInstitutionComplementExampleMultiemisor(facturamaMultiEmisor).Run();   // Complemento IEDU - Instituciones educativas
             //new WaybillComplementExampleMulti(facturamaMultiEmisor).Run();   // Complemento IEDU - Instituciones educativas
@@ -528,6 +529,15 @@ namespace MultiIssuerExamples
             {
                 Console.WriteLine(e);
             }
+        }
+
+        public static void TestListCfdi(FacturamaApiMultiemisor facturama)
+        {
+            var list = facturama.Cfdis.List(page: 0);
+            Console.WriteLine($"Se encontraron: {list.Length} elementos en la busqueda");
+            list = facturama.Cfdis.List(rfc: "EWE1709045U0"); //RFC receptor en especifico
+
+
         }
     }
 }

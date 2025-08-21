@@ -44,6 +44,7 @@ namespace WebApiExamples
                 //TestDonationCFDI(facturama);
                 //TestValidateClient(facturama);
                 //TestResponse(facturama);
+                //TestListCfdi(facturama);
             }
             catch (FacturamaException ex)
             {
@@ -791,6 +792,13 @@ namespace WebApiExamples
             Console.WriteLine(json);
         }
 
+        public void TestListCfdi(FacturamaApi facturama)
+        {
+            var list = facturama.Cfdis.List(page: 0);
+            Console.WriteLine($"Se encontraron: {list.Length} elementos en la busqueda");
+            list = facturama.Cfdis.List(rfc: "EWE1709045U0"); //RFC receptor en especifico
 
+
+        }
     }
 }
